@@ -2,16 +2,35 @@
   <div id="app">
     <h1>My To-Do List</h1>
 
-    <input v-model="newTask" @keyup.enter="addTask" placeholder="Add a new task" />
-    <button @click="addTask">Add</button>
+    <!-- Input and Add button -->
+    <n-input
+      v-model:value="newTask"
+      placeholder="Add a new task"
+      style="width: 65%; margin-right: 10px"
+      @keyup.enter="addTask"
+    />
+    <n-button type="primary" @click="addTask">Add</n-button>
 
+    <!-- Task List -->
     <ul>
       <li v-for="(task, index) in tasks" :key="index">
         <span :style="{ textDecoration: task.done ? 'line-through' : 'none' }">
           {{ task.text }}
         </span>
-        <button @click="toggleDone(index)">✅</button>
-        <button @click="removeTask(index)">❌</button>
+        <n-button
+          size="small"
+          type="success"
+          tertiary
+          style="margin-left: 5px"
+          @click="toggleDone(index)"
+        >✅</n-button>
+        <n-button
+          size="small"
+          type="error"
+          tertiary
+          style="margin-left: 5px"
+          @click="removeTask(index)"
+        >❌</n-button>
       </li>
     </ul>
   </div>
@@ -52,16 +71,8 @@ export default {
   text-align: center;
 }
 
-input {
-  padding: 8px;
-  width: 65%;
-  margin-right: 10px;
-}
-
-button {
-  margin-left: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
+ul {
+  padding: 0;
 }
 
 li {
